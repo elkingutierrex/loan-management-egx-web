@@ -42,4 +42,19 @@ export class LoanService {
     const { data } = await axios.get<Loan[]>(`${APP_CONFIG.apiUrl}/loans`);
     return data;
   }
+
+  static async updateLoanStatus(loanId: string, status: 'Aprobado' | 'Rechazado', reason?: string): Promise<Loan> {
+    if (APP_CONFIG.dataSource === 'MOCK') {
+      await new Promise(resolve => setTimeout(resolve, 800));
+      const loan = this.loans.find(l => l.id === loanId);
+      if (loan) {
+        loan.status = status;
+        if (reason) loan.rejectionReason = reason;
+        return loan;
+      }
+      throw new Error('Préstamo no encontrado');
+    }
+    const { data } = await axios.patch<Loan>(`${APP_CONFIG.apiUrl}/loans/${loanId}/status`, { status, reason });
+    return data;
+  }
 }
