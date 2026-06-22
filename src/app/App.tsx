@@ -8,7 +8,7 @@ import LoanRequestPage from '../pages/LoanRequestPage';
 
 const queryClient = new QueryClient();
 
-function ProtectedRoute({ children, role }: { children: JSX.Element; role?: string }) {
+function ProtectedRoute({ children, role }: { children: React.ReactElement; role?: string }) {
   const { user, isAuthenticated } = useAuth();
   
   if (!isAuthenticated) return <Navigate to="/login" replace />;
