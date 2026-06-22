@@ -63,7 +63,7 @@ export class LoanService {
       }
       throw new Error('Préstamo no encontrado');
     }
-    const { data } = await axios.patch<Loan>(`${APP_CONFIG.apiUrl}/loans/${loanId}/status`, { status, reason });
+    const { data } = await axios.patch<Loan>(`${APP_CONFIG.apiUrl}/loans/${loanId}/status`, { status, rejectionReason: reason });
     return data;
   }
 }
