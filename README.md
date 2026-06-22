@@ -4,21 +4,18 @@ Sistema de gestión de préstamos bancarios desarrollado con **React 19.2.7** y 
 
 ## 🚀 Tecnologías
 - **React 19.2.7** (TypeScript)
-- **Tailwind CSS**: Estilos premium con Glassmorphism y Dark Mode.
-- **TanStack Query (v5)**: Gestión de estado asíncrono y caché.
+- **Tailwind CSS**: Diseño Premium con Dark Mode y **Totalmente Responsivo**.
+- **TanStack Query (v5)**: Gestión de estado asíncrono e interceptores JWT.
 - **Lucide React**: Iconografía moderna.
-- **React Hook Form + Zod**: Validaciones robustas.
+- **Axios**: Comunicación fluida con API.
 
-## 📦 Estructura del Proyecto
-- `src/app`: Configuración de rutas y QueryClient.
-- `src/components`: Componentes UI reutilizables.
-- `src/pages`: Vistas principales (Login, Dashboard Usuario, Admin).
-- `src/services`: Capa de servicios para comunicación con API o Mocks.
-- `src/contexts`: Contextos globales (Autenticación).
+## 📱 Características UI/UX
+- **Mobile First**: Menú lateral colapsable (Sidebar) optimizado para móviles.
+- **Glassmorphism**: Estética moderna con transparencias y desenfoques.
+- **Centrado Perfecto**: Pantalla de acceso balanceada en todas las resoluciones.
 
-## 🛠️ Configuración
-El frontend puede alternar entre datos simulados (**MOCK**) y una API real (**API**) configurando el archivo `.env`:
-
+## 🛠️ Configuración (API vs MOCK)
+Configura el archivo `.env` según tus necesidades:
 ```env
 VITE_DATA_SOURCE=API
 VITE_API_URL=http://localhost:5000/api
@@ -33,5 +30,4 @@ npm run dev
 ## 🏗️ Docker
 ```bash
 docker build -t loan-web .
-docker run -p 3000:80 loan-web
 ```

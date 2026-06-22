@@ -3,6 +3,15 @@ import { MOCK_LOANS } from '../mocks/loans.mock';
 import { Loan } from '../types';
 import axios from 'axios';
 
+// Configuración global para incluir el token JWT en las peticiones
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem('auth_token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
 export class LoanService {
   private static loans: Loan[] = [...MOCK_LOANS];
 

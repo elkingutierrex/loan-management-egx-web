@@ -31,9 +31,8 @@ export default function LoanRequestPage() {
     setLoading(true);
     try {
       await LoanService.createLoan({
-        ...data,
-        userId: user!.id,
-        userName: user!.name
+        amount: data.amount,
+        term: data.term,
       });
       setIsSuccess(true);
       setTimeout(() => navigate('/user/dashboard'), 2000);
