@@ -4,6 +4,7 @@ import { AuthProvider, useAuth } from '../contexts/AuthContext';
 import LoginPage from '../pages/LoginPage';
 import UserDashboard from '../pages/UserDashboard';
 import AdminDashboard from '../pages/AdminDashboard';
+import LoanRequestPage from '../pages/LoanRequestPage';
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,14 @@ function AppRoutes() {
         element={
           <ProtectedRoute role="USER">
             <UserDashboard />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/user/request" 
+        element={
+          <ProtectedRoute role="USER">
+            <LoanRequestPage />
           </ProtectedRoute>
         } 
       />
@@ -56,7 +65,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <BrowserRouter>
-          <div className="min-h-screen bg-slate-950 text-white font-sans">
+          <div className="min-h-screen bg-slate-950 text-white font-sans selection:bg-primary-500/30">
             <AppRoutes />
           </div>
         </BrowserRouter>

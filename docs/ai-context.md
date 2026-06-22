@@ -7,21 +7,22 @@ Este documento sirve como fuente de verdad para que cualquier modelo de IA o des
 - [x] Inicialización de repositorios (`api` y `web`) en `D:\projects\personalProjects`.
 - [x] Configuración de GitFlow (ramas `main` y `develop`).
 - [x] Estructura de carpetas creada (Hexagonal en Backend, Modular en Frontend).
-- [x] Inicio de Documentación SDD (000-vision, 001-requirements).
-- [/] Configuración base de React 19 + Tailwind (Procediendo a instalar paquetes).
+- [x] Documentación SDD Inicial (000-002).
+- [x] Desarrollo de Autenticación MOCK y Login Page Premium.
+- [x] Creación de `DashboardLayout` con Sidebar y Header persistentes.
+- [/] Implementando Dashboard de Usuario y Solicitud de Préstamos.
 
 ## Arquitectura y Convenciones
 - **Backend:** .NET 10, Arquitectura Hexagonal.
 - **Frontend:** React 19.2.7, Vite, Tailwind CSS, TanStack Query.
-- **Base de Datos:** PostgreSQL.
-- **Commits:** Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`).
+- **Estado Global:** Context API para Auth, TanStack Query para Datos.
+- **Commits:** Conventional Commits.
 
 ## Tareas Pendientes Inmediatas
-1. Completar documentación SDD (Casos de uso, Modelos de dominio).
-2. Configurar entorno de desarrollo React (Vite, Tailwind, Router).
-3. Implementar capa de Mocks en Frontend.
-4. Desarrollar interfaces de Login y Dashboard.
+1. Finalizar `UserDashboard` (Lista de préstamos MOCK).
+2. Crear `LoanRequestPage` con formulario validado.
+3. Desarrollar `AdminDashboard` con filtros de estado.
+4. Iniciar fase de Backend (.NET 10).
 
 ## Riesgos y Deuda Técnica
-- Configuración de `docker-compose` pendiente para fase de integración.
-- Asegurar consistencia entre tipos de Dominio (Backend) y Typescript (Frontend).
+- Implementación de persistencia de Mocks en memoria (se reinician al recargar si no usamos localStorage para la data fake).
