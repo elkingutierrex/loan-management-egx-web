@@ -5,24 +5,24 @@ Este documento sirve como fuente de verdad para que cualquier modelo de IA o des
 
 ## Estado Actual (22-06-2026)
 - [x] Inicialización de repositorios (`api` y `web`) en `D:\projects\personalProjects`.
-- [x] Configuración de GitFlow (ramas `main` y `develop`).
+- [x] Configuración de GitFlow (ramas `main` y `develop`) sincronizadas.
 - [x] Estructura de carpetas creada (Hexagonal en Backend, Modular en Frontend).
-- [x] Documentación SDD Inicial (000-002).
-- [x] Desarrollo de Autenticación MOCK y Login Page Premium.
-- [x] Creación de `DashboardLayout` con Sidebar y Header persistentes.
-- [/] Implementando Dashboard de Usuario y Solicitud de Préstamos.
+- [x] Documentación SDD Inicial y ADR-001 al ADR-003 completados.
+- [x] Frontend 100% Funcional con Mocks (Login, User Dash, Loan Request, Admin Dash).
+- [x] Backend (.NET 10) compila correctamente con Inyección de Dependencias y Auth JWT.
+- [x] Pruebas Unitarias al 100% de éxito (xUnit + Moq).
+- [/] Dockerización en proceso.
 
 ## Arquitectura y Convenciones
-- **Backend:** .NET 10, Arquitectura Hexagonal.
-- **Frontend:** React 19.2.7, Vite, Tailwind CSS, TanStack Query.
-- **Estado Global:** Context API para Auth, TanStack Query para Datos.
-- **Commits:** Conventional Commits.
+- **Backend:** .NET 11, Arquitectura Hexagonal.
+- **Frontend:** React 19, Tailwind CSS, TanStack Query.
+- **Gestión de Versiones:** Commits atómicos, GitFlow respetado.
+- **Git Hygiene:** .gitignore actualizado y repositorios limpios de basura técnica.
 
 ## Tareas Pendientes Inmediatas
-1. Finalizar `UserDashboard` (Lista de préstamos MOCK).
-2. Crear `LoanRequestPage` con formulario validado.
-3. Desarrollar `AdminDashboard` con filtros de estado.
-4. Iniciar fase de Backend (.NET 10).
+1. Implementar Dockerfile y Docker-compose.
+2. Finalizar ADRs restantes (Testing Strategy, Frontend State).
+3. Revisión final de requerimientos (RF-01 a RF-05).
 
 ## Riesgos y Deuda Técnica
-- Implementación de persistencia de Mocks en memoria (se reinician al recargar si no usamos localStorage para la data fake).
+- Falta implementación de Refresh Tokens (Considerado punto extra).
