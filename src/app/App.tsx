@@ -1,25 +1,66 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AuthProvider, useAuth } from '../contexts/AuthContext';
+import LoginPage from '../pages/LoginPage';
+import UserDashboard from '../pages/UserDashboard';
+import AdminDashboard from '../pages/AdminDashboard';
 
 const queryClient = new QueryClient();
+
+function ProtectedRoute({ children, role }: { children: JSX.Element; role?: string }) {
+  const { user, isAuthenticated } = useAuth();
+  
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  if (role && user?.role !== role) return <Navigate to="/" replace />;
+  
+  return children;
+}
+
+function AppRoutes() {
+  const { user } = useAuth();
+  
+  return (
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route 
+        path="/user/dashboard" 
+        element={
+          <ProtectedRoute role="USER">
+            <UserDashboard />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/admin/dashboard" 
+        element={
+          <ProtectedRoute role="ADMIN">
+            <AdminDashboard />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/" 
+        element={
+          user 
+            ? <Navigate to={user.role === 'ADMIN' ? '/admin/dashboard' : '/user/dashboard'} replace />
+            : <Navigate to="/login" replace />
+        } 
+      />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
+}
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <div className="min-h-screen bg-slate-950 text-white">
-          <Routes>
-            <Route path="/" element={<div className="flex flex-col items-center justify-center min-h-screen">
-              <h1 className="text-5xl font-bold text-primary-500 mb-4">BankLoan System</h1>
-              <p className="text-slate-400 text-xl">React 19 + Tailwind + .NET 10</p>
-              <div className="mt-8 p-6 bg-slate-900 rounded-2xl border border-slate-800 shadow-2xl">
-                <p>Status: <span className="text-green-400 font-medium">Ready for Development</span></p>
-              </div>
-            </div>} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <div className="min-h-screen bg-slate-950 text-white font-sans">
+            <AppRoutes />
+          </div>
+        </BrowserRouter>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
