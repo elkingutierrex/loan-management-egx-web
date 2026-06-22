@@ -3,6 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { LogOut, LayoutDashboard, User as UserIcon, Bell, X, Menu } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { clsx } from 'clsx';
+import { AlertService } from '../services/AlertService';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -61,18 +62,20 @@ export default function DashboardLayout({ children, title }: DashboardLayoutProp
           </div>
 
           <nav className="flex-1 space-y-1 p-4 mt-6">
-            {menuItems.map((item) => (
-              <button 
-                key={item.label}
-                className={clsx(
-                  "flex w-full items-center gap-3 rounded-xl px-4 py-3 transition",
-                  item.active ? "bg-primary-500/10 text-primary-400" : "text-slate-400 hover:bg-slate-800/50 hover:text-slate-100"
-                )}
-              >
-                <item.icon className="h-5 w-5" />
-                <span className="font-medium">{item.label}</span>
-              </button>
-            ))}
+            <button 
+              onClick={() => navigate(user?.role === 'ADMIN' ? '/admin/dashboard' : '/user/dashboard')}
+              className="flex w-full items-center gap-3 rounded-xl bg-primary-500/10 px-4 py-3 text-primary-400 transition"
+            >
+              <LayoutDashboard className="h-5 w-5" />
+              <span className="font-medium">Dashboard</span>
+            </button>
+            <button 
+              onClick={() => AlertService.underConstruction()}
+              className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-slate-400 transition hover:bg-slate-800/50 hover:text-slate-100"
+            >
+              <Bell className="h-5 w-5" />
+              <span className="font-medium">Notificaciones</span>
+            </button>
           </nav>
 
           <div className="border-t border-slate-800 p-4">

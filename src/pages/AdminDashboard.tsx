@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { LoanService } from '../services/LoanService';
+import { AlertService } from '../services/AlertService';
 import DashboardLayout from '../layouts/DashboardLayout';
 import { 
   Clock, 
@@ -53,9 +54,11 @@ export default function AdminDashboard() {
 
   const filteredLoans = loans?.filter(l => filter === 'Todos' || l.status === filter);
 
-  const handleApprove = (id: string) => {
-    if (confirm('¿Estás seguro de aprobar este préstamo?')) {
+  const handleApprove = async (id: string) => {
+    const result = await AlertService.confirm('¿Aprobar Préstamo?', 'Esta acción no se puede deshacer');
+    if (result.isConfirmed) {
       updateMutation.mutate({ id, status: 'Aprobado' });
+      AlertService.success('¡Aprobado!', 'El préstamo ha sido procesado con éxito');
     }
   };
 
